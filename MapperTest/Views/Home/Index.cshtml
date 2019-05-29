@@ -1,0 +1,41 @@
+﻿<html lang="en">
+<head>
+    <link href="~/css/ol.css" rel="stylesheet" />
+    <script src="~/js/ol.js"></script>
+    <style>
+        .map {
+            height: 600px;
+            width: 100%;
+        }
+    </style>
+    <title>Map Test 1</title>
+</head>
+<body>
+    <h2>My Map</h2>
+    <div id="map" class="map"></div>
+    <script>
+        import Map from 'ol/Map.js'
+        import View from 'ol/View.js'
+        import {getCenter} from 'ol/extent.js'
+        import ImageLayer from 'ol/layer/Image.js'
+        import Projection from 'ol/proj/Projection.js'
+        import Static from 'ol/source/ImageStatic.js'
+
+
+        var map = new ol.Map({
+            target: 'map',
+            layers: [
+                new ImageLayer({
+                    source: new Static({
+                        url: '/Maps/OfficeTest1.png',
+                    })
+                })
+            ],
+            view: new ol.View({
+                center: ol.proj.fromLonLat([37.41, 8.82]),
+                zoom: 4
+            })
+        });
+    </script>
+</body>
+</html>
