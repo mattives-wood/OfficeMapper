@@ -23,7 +23,7 @@
 
         var extent = [0, 0, 1024, 968];
         var projection = new ol.proj.Projection({
-            code: 'xkcd-image',
+            //code: 'xkcd-image',
             units: 'pixels',
             extent: extent
         });
@@ -33,10 +33,10 @@
             layers: [
                 new ol.layer.Image({
                     source: new ol.source.ImageStatic({
-                        url: 'https://imgs.xkcd.com/comics/online_communities.png',
+                        url: '/Maps/OfficeTest1.png',
                         projection: projection,
-                        extent: extent,
-                        attributions: '© <a href="http://xkcd.com/license.html">xkcd</a>',
+                        imageExtent: extent,
+                        //attributions: '© <a href="http://xkcd.com/license.html">xkcd</a>',
                     })
                 })
             ],
