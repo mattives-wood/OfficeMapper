@@ -14,28 +14,40 @@
     <h2>My Map</h2>
     <div id="map" class="map"></div>
     <script>
-        import Map from 'ol/Map.js'
-        import View from 'ol/View.js'
-        import {getCenter} from 'ol/extent.js'
-        import ImageLayer from 'ol/layer/Image.js'
-        import Projection from 'ol/proj/Projection.js'
-        import Static from 'ol/source/ImageStatic.js'
+        //import Map from 'ol/Map.js'
+        //import View from 'ol/View.js'
+        //import {getCenter} from 'ol/extent.js'
+        //import ImageLayer from 'ol/layer/Image.js'
+        //import Projection from 'ol/proj/Projection.js'
+        //import Static from 'ol/source/ImageStatic.js'
 
+        var extent = [0, 0, 1024, 968];
+        var projection = new ol.proj.Projection({
+            code: 'xkcd-image',
+            units: 'pixels',
+            extent: extent
+        });
 
         var map = new ol.Map({
             target: 'map',
             layers: [
-                new ImageLayer({
-                    source: new Static({
-                        url: '/Maps/OfficeTest1.png',
+                new ol.layer.Image({
+                    source: new ol.source.ImageStatic({
+                        url: 'https://imgs.xkcd.com/comics/online_communities.png',
+                        projection: projection,
+                        extent: extent,
+                        attributions: '© <a href="http://xkcd.com/license.html">xkcd</a>',
                     })
                 })
             ],
             view: new ol.View({
-                center: ol.proj.fromLonLat([37.41, 8.82]),
-                zoom: 4
+                projection: projection,
+                center: ol.extent.getCenter(extent),
+                zoom: 2,
+                maxZoom: 8
             })
         });
     </script>
 </body>
 </html>
+
