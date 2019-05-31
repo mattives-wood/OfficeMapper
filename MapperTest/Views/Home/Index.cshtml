@@ -1,7 +1,13 @@
 ﻿<html lang="en">
 <head>
-    <link href="~/css/ol.css" rel="stylesheet" />
-    <script src="~/js/ol.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css"
+          integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+          crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"
+            integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og=="
+            crossorigin=""></script>
+    <script src="https://cdn.rawgit.com/ardhi/Leaflet.MousePosition/master/src/L.Control.MousePosition.js" type="text/javascript"></script>
+
     <style>
         .map {
             height: 600px;
@@ -11,42 +17,101 @@
     <title>Map Test 1</title>
 </head>
 <body>
-    <h2>My Map</h2>
     <div id="map" class="map"></div>
-    <script>
-        //import Map from 'ol/Map.js'
-        //import View from 'ol/View.js'
-        //import {getCenter} from 'ol/extent.js'
-        //import ImageLayer from 'ol/layer/Image.js'
-        //import Projection from 'ol/proj/Projection.js'
-        //import Static from 'ol/source/ImageStatic.js'
-
-        var extent = [0, 0, 1024, 968];
-        var projection = new ol.proj.Projection({
-            //code: 'xkcd-image',
-            units: 'pixels',
-            extent: extent
+    <script type="text/javascript">
+        var mapExtent = [0.00000000, -926.00000000, 3051.00000000, 0.00000000];
+        var mapMinZoom = 0;
+        var mapMaxZoom = 4;
+        var mapMaxResolution = 1.00000000;
+        var mapMinResolution = Math.pow(2, mapMaxZoom) * mapMaxResolution;
+        var tileExtent = [0.00000000, -926.00000000, 3051.00000000, 0.00000000];
+        var crs = L.CRS.Simple;
+        crs.transformation = new L.Transformation(1, -tileExtent[0], -1, tileExtent[3]);
+        crs.scale = function (zoom) {
+            return Math.pow(2, zoom) / mapMinResolution;
+        };
+        crs.zoom = function (scale) {
+            return Math.log(scale * mapMinResolution) / Math.LN2;
+        };
+        var layer;
+        var map = new L.Map('map', {
+            maxZoom: mapMaxZoom,
+            minZoom: mapMinZoom,
+            crs: crs
         });
 
-        var map = new ol.Map({
-            target: 'map',
-            layers: [
-                new ol.layer.Image({
-                    source: new ol.source.ImageStatic({
-                        url: '/Maps/OfficeTest1.png',
-                        projection: projection,
-                        imageExtent: extent,
-                        //attributions: '© <a href="http://xkcd.com/license.html">xkcd</a>',
-                    })
-                })
-            ],
-            view: new ol.View({
-                projection: projection,
-                center: ol.extent.getCenter(extent),
-                zoom: 2,
-                maxZoom: 8
-            })
+        layer = L.tileLayer('Maps/ITDept/{z}/{x}/{y}.png', {
+            minZoom: mapMinZoom, maxZoom: mapMaxZoom,
+            //attribution: 'Rendered with <a href="https://www.maptiler.com/desktop/">MapTiler Desktop</a>',
+            noWrap: true,
+            tms: false
+        }).addTo(map);
+        map.fitBounds([
+            crs.unproject(L.point(mapExtent[2], mapExtent[3])),
+            crs.unproject(L.point(mapExtent[0], mapExtent[1]))
+        ]);
+        //L.control.mousePosition().addTo(map)
+
+        var popup = L.popup();
+
+        function onMapClick(e) {
+            popup
+                .setLatLng(e.latlng)
+                .setContent("You clicked the map at " + e.latlng.toString())
+                .openOn(map);
+        }
+
+        map.on('click', onMapClick);
+
+
+        var Office1 = [-659,315.5];
+        var Office2 = [-704, 515.5];
+        var Office3 = [-642, 771];
+        var Office4 = [-718, 1089];
+        var Office5 = [-702, 1283];
+        var Office6 = [-704, 1597];
+        var Office7 = [-702, 1803];
+        var Office8 = [-706, 2103];
+        var Office9 = [-716, 2307];
+        var HelpDesk1 = [-240, 1249];
+        var HelpDesk2 = [-122, 1253];
+        var HelpDesk3 = [-240, 1661];
+        var HelpDesk4 = [-116, 1665];
+        var FireExtinguisher1 = L.latLng(-316, 2285);
+        var FireExtinguisher2 = L.latLng(-299, 707.5);
+
+        //L.marker(Office1).addTo(map).bindPopup('Amy Kaup')
+
+        var Office2RectBounds = [[-729, 490.5], [-679, 540]]
+
+        var ConvertToRectBounds = function (point) {
+            return [[point[0] -25, point[1] -25], [point[0] +25, point[1] +25]]
+        }
+
+        L.rectangle(ConvertToRectBounds(Office1), { color: "#ff0000", weight: 1 }).addTo(map).bindPopup('Amy Kaup');
+        L.rectangle(ConvertToRectBounds(Office2), { color: "#ff0000", weight: 1 }).addTo(map).bindPopup('Dan Brandl');
+        L.rectangle(ConvertToRectBounds(Office3), { color: "#ff0000", weight: 1 }).addTo(map).bindPopup('Wendy Markworth');
+        L.rectangle(ConvertToRectBounds(Office4), { color: "#ff0000", weight: 1 }).addTo(map).bindPopup('Chris Markworth');
+        L.rectangle(ConvertToRectBounds(Office5), { color: "#ff0000", weight: 1 }).addTo(map).bindPopup('Matt Ives');
+        L.rectangle(ConvertToRectBounds(Office6), { color: "#ff0000", weight: 1 }).addTo(map).bindPopup('Lisa Keller');
+        L.rectangle(ConvertToRectBounds(Office7), { color: "#ff0000", weight: 1 }).addTo(map).bindPopup('Jason DeMarco');
+        L.rectangle(ConvertToRectBounds(Office8), { color: "#ff0000", weight: 1 }).addTo(map).bindPopup('Dave Schreiber');
+        L.rectangle(ConvertToRectBounds(Office9), { color: "#ff0000", weight: 1 }).addTo(map).bindPopup('Phil Anderson');
+        L.rectangle(ConvertToRectBounds(HelpDesk1), { color: "#ff0000", weight: 1 }).addTo(map).bindPopup('Carolynn Martin');
+        L.rectangle(ConvertToRectBounds(HelpDesk2), { color: "#ff0000", weight: 1 }).addTo(map).bindPopup('Jason McDonald');
+        L.rectangle(ConvertToRectBounds(HelpDesk3), { color: "#ff0000", weight: 1 }).addTo(map).bindPopup('Steven Xiong');
+        L.rectangle(ConvertToRectBounds(HelpDesk4), { color: "#ff0000", weight: 1 }).addTo(map).bindPopup('Matt Thomas');
+
+        var FireExIcon = L.icon({
+            iconUrl: 'img/FireEx.png',
+            iconSize: [32,32],
+            iconAnchor: [16,32],
+            popupAnchor: [0,-32]
         });
+
+        L.marker(FireExtinguisher1, { icon: FireExIcon }).addTo(map).bindPopup('Fire Extinguisher that doesnt exist')
+        L.marker(FireExtinguisher2, { icon: FireExIcon }).addTo(map).bindPopup('Fire Extinguisher')
+
     </script>
 </body>
 </html>
