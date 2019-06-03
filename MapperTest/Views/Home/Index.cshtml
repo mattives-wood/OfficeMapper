@@ -50,7 +50,7 @@
             crs.unproject(L.point(mapExtent[2], mapExtent[3])),
             crs.unproject(L.point(mapExtent[0], mapExtent[1]))
         ]);
-        //L.control.mousePosition().addTo(map)
+        L.control.mousePosition().addTo(map)
 
         var popup = L.popup();
 
@@ -88,29 +88,36 @@
             return [[point[0] -25, point[1] -25], [point[0] +25, point[1] +25]]
         }
 
-        L.rectangle(ConvertToRectBounds(Office1), { color: "#ff0000", weight: 1 }).addTo(map).bindPopup('Amy Kaup');
-        L.rectangle(ConvertToRectBounds(Office2), { color: "#ff0000", weight: 1 }).addTo(map).bindPopup('Dan Brandl');
-        L.rectangle(ConvertToRectBounds(Office3), { color: "#ff0000", weight: 1 }).addTo(map).bindPopup('Wendy Markworth');
-        L.rectangle(ConvertToRectBounds(Office4), { color: "#ff0000", weight: 1 }).addTo(map).bindPopup('Chris Markworth');
-        L.rectangle(ConvertToRectBounds(Office5), { color: "#ff0000", weight: 1 }).addTo(map).bindPopup('Matt Ives');
-        L.rectangle(ConvertToRectBounds(Office6), { color: "#ff0000", weight: 1 }).addTo(map).bindPopup('Lisa Keller');
-        L.rectangle(ConvertToRectBounds(Office7), { color: "#ff0000", weight: 1 }).addTo(map).bindPopup('Jason DeMarco');
-        L.rectangle(ConvertToRectBounds(Office8), { color: "#ff0000", weight: 1 }).addTo(map).bindPopup('Dave Schreiber');
-        L.rectangle(ConvertToRectBounds(Office9), { color: "#ff0000", weight: 1 }).addTo(map).bindPopup('Phil Anderson');
-        L.rectangle(ConvertToRectBounds(HelpDesk1), { color: "#ff0000", weight: 1 }).addTo(map).bindPopup('Carolynn Martin');
-        L.rectangle(ConvertToRectBounds(HelpDesk2), { color: "#ff0000", weight: 1 }).addTo(map).bindPopup('Jason McDonald');
-        L.rectangle(ConvertToRectBounds(HelpDesk3), { color: "#ff0000", weight: 1 }).addTo(map).bindPopup('Steven Xiong');
-        L.rectangle(ConvertToRectBounds(HelpDesk4), { color: "#ff0000", weight: 1 }).addTo(map).bindPopup('Matt Thomas');
+        var PersonIcon = L.icon({
+            iconUrl: 'img/Person.png',
+            iconSize: [32, 32],
+            iconAnchor: [16, 16],
+            popupAnchor: [0,-16]
+        });
+
+        L.marker(Office1, { icon: PersonIcon }, { color: "#ffffff", weight: 1 }).addTo(map).bindPopup('Amy Kaup');
+        L.marker(Office2, { icon: PersonIcon }, { color: "#ffffff", weight: 1 }).addTo(map).bindPopup('Dan Brandl');
+        L.marker(Office3, { icon: PersonIcon }, { color: "#ffffff", weight: 1 }).addTo(map).bindPopup('Wendy Markworth');
+        L.marker(Office4, { icon: PersonIcon }, { color: "#ffffff", weight: 1 }).addTo(map).bindPopup('Chris Markworth');
+        L.marker(Office5, { icon: PersonIcon }, { color: "#ffffff", weight: 1 }).addTo(map).bindPopup('Matt Ives');
+        L.marker(Office6, { icon: PersonIcon }, { color: "#ffffff", weight: 1 }).addTo(map).bindPopup('Lisa Keller');
+        L.marker(Office7, { icon: PersonIcon }, { color: "#ffffff", weight: 1 }).addTo(map).bindPopup('Jason DeMarco');
+        L.marker(Office8, { icon: PersonIcon }, { color: "#ffffff", weight: 1 }).addTo(map).bindPopup('Dave Schreiber');
+        L.marker(Office9, { icon: PersonIcon }, { color: "#ffffff", weight: 1 }).addTo(map).bindPopup('Phil Anderson');
+        L.marker(HelpDesk1, { icon: PersonIcon }, { color: "#ffffff", weight: 1 }).addTo(map).bindPopup('Carolynn Martin');
+        L.marker(HelpDesk2, { icon: PersonIcon }, { color: "#ffffff", weight: 1 }).addTo(map).bindPopup('Jason McDonald');
+        L.marker(HelpDesk3, { icon: PersonIcon }, { color: "#ffffff", weight: 1 }).addTo(map).bindPopup('Steven Xiong');
+        L.marker(HelpDesk4, { icon: PersonIcon }, { color: "#ffffff", weight: 1 }).addTo(map).bindPopup('Matt Thomas');
 
         var FireExIcon = L.icon({
             iconUrl: 'img/FireEx.png',
             iconSize: [32,32],
             iconAnchor: [16,32],
-            popupAnchor: [0,-32]
+            tooltipAnchor: [0,-32]
         });
 
-        L.marker(FireExtinguisher1, { icon: FireExIcon }).addTo(map).bindPopup('Fire Extinguisher that doesnt exist')
-        L.marker(FireExtinguisher2, { icon: FireExIcon }).addTo(map).bindPopup('Fire Extinguisher')
+        L.marker(FireExtinguisher1, { icon: FireExIcon }).addTo(map).bindTooltip('Fire Extinguisher')
+        L.marker(FireExtinguisher2, { icon: FireExIcon }).addTo(map).bindTooltip('Fire Extinguisher')
 
     </script>
 </body>
