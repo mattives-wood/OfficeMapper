@@ -9,11 +9,18 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="2.2.4" />
   </ItemGroup>
 
 
   <ItemGroup>
     <Folder Include="wwwroot\Maps\" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <ProjectReference Include="..\MapperTest.Data\MapperTest.Data.csproj" />
+    <ProjectReference Include="..\MapperTest.Domain\MapperTest.Domain.csproj" />
   </ItemGroup>
 
 </Project>
