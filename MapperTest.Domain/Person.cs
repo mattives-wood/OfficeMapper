@@ -1,4 +1,4 @@
-﻿using System;
+﻿using NetTopologySuite.Geometries;
 
 namespace MapperTest.Domain
 {
@@ -12,9 +12,10 @@ namespace MapperTest.Domain
         public string FirstName { get; set; }
         public string LastName { get; set; }
         //picture
-        public int MapId { get; set; }
+        public long MapId { get; set; }
+        public Map Map { get; set; }
         //public decimal CoordX { get; set; }
         //public decimal CoordY { get; set; }
-        public SpatialData
+        public Point Coords { get; set; }
     }
 }
