@@ -12,10 +12,7 @@ namespace MapperTest.Domain
         public string FirstName { get; set; }
         public string LastName { get; set; }
         //picture
-        public long MapId { get; set; }
-        public Map Map { get; set; }
-        //public decimal CoordX { get; set; }
-        //public decimal CoordY { get; set; }
-        public Point Coords { get; set; }
+        public long SeatId { get; set; }
+        public Seat Seat { get; set; }
     }
 }

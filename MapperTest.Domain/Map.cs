@@ -8,7 +8,7 @@ namespace MapperTest.Domain
     {
         public Map()
         {
-            Persons = new List<Person>();
+            Seats = new List<Seat>();
             Fixtures = new List<Fixture>();
         }
 
@@ -16,7 +16,7 @@ namespace MapperTest.Domain
         public string Building { get; set; }
         public string Floor { get; set; }
         public string Description { get; set; }
-        public List<Person> Persons { get; set; }
+        public List<Seat> Seats { get; set; }
         public List<Fixture> Fixtures { get; set; }
     }
 }

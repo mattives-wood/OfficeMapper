@@ -4,15 +4,17 @@ using MapperTest.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NetTopologySuite.Geometries;
 
 namespace MapperTest.Data.Migrations
 {
     [DbContext(typeof(MapperContext))]
-    partial class MapperContextModelSnapshot : ModelSnapshot
+    [Migration("20190612202409_Init")]
+    partial class Init
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -117,6 +119,10 @@ namespace MapperTest.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<Point>("Coords")
+                        .IsRequired()
+                        .HasColumnType("geometry");
+
                     b.Property<string>("FirstName")
                         .IsRequired()
                         .HasMaxLength(50);
@@ -125,11 +131,11 @@ namespace MapperTest.Data.Migrations
                         .IsRequired()
                         .HasMaxLength(50);
 
-                    b.Property<long>("SeatId");
+                    b.Property<long>("MapId");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("SeatId");
+                    b.HasIndex("MapId");
 
                     b.ToTable("Persons");
 
@@ -137,224 +143,106 @@ namespace MapperTest.Data.Migrations
                         new
                         {
                             Id = 1L,
+                            Coords = (NetTopologySuite.Geometries.Point)new NetTopologySuite.IO.WKTReader().Read("SRID=0;POINT (-659 315.5)"),
                             FirstName = "Amy",
                             LastName = "Kaup",
-                            SeatId = 1L
-                        },
-                        new
-                        {
-                            Id = 2L,
-                            FirstName = "Dan",
-                            LastName = "Brandl",
-                            SeatId = 2L
-                        },
-                        new
-                        {
-                            Id = 3L,
-                            FirstName = "Wendy",
-                            LastName = "Markworth",
-                            SeatId = 3L
-                        },
-                        new
-                        {
-                            Id = 4L,
-                            FirstName = "Chris",
-                            LastName = "Markworth",
-                            SeatId = 4L
-                        },
-                        new
-                        {
-                            Id = 5L,
-                            FirstName = "Matt",
-                            LastName = "Ives",
-                            SeatId = 5L
-                        },
-                        new
-                        {
-                            Id = 6L,
-                            FirstName = "Lisa",
-                            LastName = "Keller",
-                            SeatId = 6L
-                        },
-                        new
-                        {
-                            Id = 7L,
-                            FirstName = "Jason",
-                            LastName = "DeMarco",
-                            SeatId = 7L
-                        },
-                        new
-                        {
-                            Id = 8L,
-                            FirstName = "Dave",
-                            LastName = "Schreiber",
-                            SeatId = 8L
-                        },
-                        new
-                        {
-                            Id = 9L,
-                            FirstName = "Phil",
-                            LastName = "Anderson",
-                            SeatId = 9L
-                        },
-                        new
-                        {
-                            Id = 10L,
-                            FirstName = "Carolynn",
-                            LastName = "Martin",
-                            SeatId = 10L
-                        },
-                        new
-                        {
-                            Id = 11L,
-                            FirstName = "Jason",
-                            LastName = "McDonald",
-                            SeatId = 11L
-                        },
-                        new
-                        {
-                            Id = 12L,
-                            FirstName = "Steven",
-                            LastName = "Xiong",
-                            SeatId = 12L
-                        },
-                        new
-                        {
-                            Id = 13L,
-                            FirstName = "Matt",
-                            LastName = "Thomas",
-                            SeatId = 13L
-                        });
-                });
-
-            modelBuilder.Entity("MapperTest.Domain.Seat", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<Point>("Coords")
-                        .IsRequired()
-                        .HasColumnType("geometry");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasMaxLength(100);
-
-                    b.Property<long>("MapId");
-
-                    b.Property<int>("Number");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("MapId");
-
-                    b.ToTable("Seats");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1L,
-                            Coords = (NetTopologySuite.Geometries.Point)new NetTopologySuite.IO.WKTReader().Read("SRID=0;POINT (-659 315.5)"),
-                            Description = "Manager's Office",
-                            MapId = 1L,
-                            Number = 1
+                            MapId = 1L
                         },
                         new
                         {
                             Id = 2L,
                             Coords = (NetTopologySuite.Geometries.Point)new NetTopologySuite.IO.WKTReader().Read("SRID=0;POINT (-704 515.5)"),
-                            Description = "Programmer Office 1",
-                            MapId = 1L,
-                            Number = 2
+                            FirstName = "Dan",
+                            LastName = "Brandl",
+                            MapId = 1L
                         },
                         new
                         {
                             Id = 3L,
                             Coords = (NetTopologySuite.Geometries.Point)new NetTopologySuite.IO.WKTReader().Read("SRID=0;POINT (-642 771)"),
-                            Description = "Programmer Office 2",
-                            MapId = 1L,
-                            Number = 3
+                            FirstName = "Wendy",
+                            LastName = "Markworth",
+                            MapId = 1L
                         },
                         new
                         {
                             Id = 4L,
                             Coords = (NetTopologySuite.Geometries.Point)new NetTopologySuite.IO.WKTReader().Read("SRID=0;POINT (-718 1089)"),
-                            Description = "Programmer Office 3",
-                            MapId = 1L,
-                            Number = 4
+                            FirstName = "Chris",
+                            LastName = "Markworth",
+                            MapId = 1L
                         },
                         new
                         {
                             Id = 5L,
                             Coords = (NetTopologySuite.Geometries.Point)new NetTopologySuite.IO.WKTReader().Read("SRID=0;POINT (-702 1283)"),
-                            Description = "Programmer Office 4",
-                            MapId = 1L,
-                            Number = 5
+                            FirstName = "Matt",
+                            LastName = "Ives",
+                            MapId = 1L
                         },
                         new
                         {
                             Id = 6L,
                             Coords = (NetTopologySuite.Geometries.Point)new NetTopologySuite.IO.WKTReader().Read("SRID=0;POINT (-704 1597)"),
-                            Description = "Application Specialist Office",
-                            MapId = 1L,
-                            Number = 6
+                            FirstName = "Lisa",
+                            LastName = "Keller",
+                            MapId = 1L
                         },
                         new
                         {
                             Id = 7L,
                             Coords = (NetTopologySuite.Geometries.Point)new NetTopologySuite.IO.WKTReader().Read("SRID=0;POINT (-702 1803)"),
-                            Description = "Network Manager's Office",
-                            MapId = 1L,
-                            Number = 7
+                            FirstName = "Jason",
+                            LastName = "DeMarco",
+                            MapId = 1L
                         },
                         new
                         {
                             Id = 8L,
                             Coords = (NetTopologySuite.Geometries.Point)new NetTopologySuite.IO.WKTReader().Read("SRID=0;POINT (-706 2103)"),
-                            Description = "Network Specialist Office 1",
-                            MapId = 1L,
-                            Number = 8
+                            FirstName = "Dave",
+                            LastName = "Schreiber",
+                            MapId = 1L
                         },
                         new
                         {
                             Id = 9L,
                             Coords = (NetTopologySuite.Geometries.Point)new NetTopologySuite.IO.WKTReader().Read("SRID=0;POINT (-716 2307)"),
-                            Description = "Network Specialist Office 2",
-                            MapId = 1L,
-                            Number = 9
+                            FirstName = "Phil",
+                            LastName = "Anderson",
+                            MapId = 1L
                         },
                         new
                         {
                             Id = 10L,
                             Coords = (NetTopologySuite.Geometries.Point)new NetTopologySuite.IO.WKTReader().Read("SRID=0;POINT (-240 1249)"),
-                            Description = "Help Desk 1",
-                            MapId = 1L,
-                            Number = 10
+                            FirstName = "Carolynn",
+                            LastName = "Martin",
+                            MapId = 1L
                         },
                         new
                         {
                             Id = 11L,
                             Coords = (NetTopologySuite.Geometries.Point)new NetTopologySuite.IO.WKTReader().Read("SRID=0;POINT (-122 1253)"),
-                            Description = "Help Desk 2",
-                            MapId = 1L,
-                            Number = 11
+                            FirstName = "Jason",
+                            LastName = "McDonald",
+                            MapId = 1L
                         },
                         new
                         {
                             Id = 12L,
                             Coords = (NetTopologySuite.Geometries.Point)new NetTopologySuite.IO.WKTReader().Read("SRID=0;POINT (-240 1661)"),
-                            Description = "Help Desk 3",
-                            MapId = 1L,
-                            Number = 12
+                            FirstName = "Steven",
+                            LastName = "Xiong",
+                            MapId = 1L
                         },
                         new
                         {
                             Id = 13L,
                             Coords = (NetTopologySuite.Geometries.Point)new NetTopologySuite.IO.WKTReader().Read("SRID=0;POINT (-116 1665)"),
-                            Description = "Help Desk 4",
-                            MapId = 1L,
-                            Number = 13
+                            FirstName = "Matt",
+                            LastName = "Thomas",
+                            MapId = 1L
                         });
                 });
 
@@ -373,16 +261,8 @@ namespace MapperTest.Data.Migrations
 
             modelBuilder.Entity("MapperTest.Domain.Person", b =>
                 {
-                    b.HasOne("MapperTest.Domain.Seat", "Seat")
-                        .WithMany()
-                        .HasForeignKey("SeatId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("MapperTest.Domain.Seat", b =>
-                {
                     b.HasOne("MapperTest.Domain.Map", "Map")
-                        .WithMany("Seats")
+                        .WithMany("Persons")
                         .HasForeignKey("MapId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
