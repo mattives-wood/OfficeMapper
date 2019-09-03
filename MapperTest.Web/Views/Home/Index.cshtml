@@ -50,18 +50,18 @@
             crs.unproject(L.point(mapExtent[2], mapExtent[3])),
             crs.unproject(L.point(mapExtent[0], mapExtent[1]))
         ]);
-        L.control.mousePosition().addTo(map)
+        //L.control.mousePosition().addTo(map)
 
-        var popup = L.popup();
+        //var popup = L.popup();
 
-        function onMapClick(e) {
-            popup
-                .setLatLng(e.latlng)
-                .setContent("You clicked the map at " + e.latlng.toString())
-                .openOn(map);
-        }
+        //function onMapClick(e) {
+        //    popup
+        //        .setLatLng(e.latlng)
+        //        .setContent("You clicked the map at " + e.latlng.toString())
+        //        .openOn(map);
+        //}
 
-        map.on('click', onMapClick);
+        //map.on('click', onMapClick);
 
 
         var Office1 = [-659,315.5];

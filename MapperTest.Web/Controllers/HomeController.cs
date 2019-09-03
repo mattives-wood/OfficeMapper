@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using MapperTest.Models;
 using Microsoft.AspNetCore.Mvc;
-using MapperTest.Models;
+using System.Diagnostics;
 
 namespace MapperTest.Controllers
 {
@@ -12,11 +8,7 @@ namespace MapperTest.Controllers
     {
         public IActionResult Index()
         {
-            return View();
-        }
 
-        public IActionResult Privacy()
-        {
             return View();
         }
 
